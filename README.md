@@ -75,12 +75,24 @@ python demo.py -i /path/to/your/image \
 - Note:
   * -i, --img: image path.
   * --cfg: config files.
-  * -d: choose datasets, COCO or VOC.
+  * -d: choose datasets, COCO or VOC or SWIM.
   * -c, --checkpoint: pretrained weights.
   * --half: FP16 testing.
   * -s: evaluation image size, from 320 to 608 as in YOLOv3.
 
-
+### Demo for videos
+```Shell
+python video_test.py -v /path/to/your/video \
+--cfg config/yolov3_baseline.cfg -d COCO \
+--checkpoint /path/to/you/weights --half --asff --rfb -s 608
+```
+- Note:
+  * -v, --video: video folder path.
+  * --cfg: config files.
+  * -d: choose datasets, COCO or VOC or SWIM.
+  * -c, --checkpoint: pretrained weights.
+  * --half: FP16 testing.
+  * -s: evaluation image size, from 320 to 608 as in YOLOv3.
 ## Datasets
 Note: We currently only support [COCO](http://mscoco.org/) and [VOC](http://host.robots.ox.ac.uk/pascal/VOC/).  
 To make things easy, we provide simple COCO and VOC dataset loader that inherits `torch.utils.data.Dataset` making it fully compatible with the `torchvision.datasets` [API](http://pytorch.org/docs/torchvision/datasets.html).
@@ -108,6 +120,8 @@ Install the VOC dataset as ./data/VOC. We also recommend a soft-link:
 ```
 ln -s /path/to/VOCdevkit ./data/VOC
 ```
+### SWIM Dataset(in VOC format)
+ln -s /path/to/SWIM ./SWIM
 
 ## Training
 
