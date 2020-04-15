@@ -83,14 +83,14 @@ python demo.py -i /path/to/your/image \
 ### Demo for videos
 ```Shell
 python video_test.py -v /path/to/your/video \
---cfg config/yolov3_baseline.cfg -d COCO \
+--cfg config/yolov3_baseline.cfg -d SWIM \
 --checkpoint /path/to/you/weights --half --asff --rfb -s 608
 ```
 - Note:
-  * -v, --video: video folder path.
-  * --cfg: config files.
+  * -v, --video: video folder path. eg, ./examples
+  * --cfg: config files. 
   * -d: choose datasets, COCO or VOC or SWIM.
-  * -c, --checkpoint: pretrained weights.
+  * -c, --checkpoint: pretrained weights. eg, ./weights/yolov3_SWIM_asff_mixup_cos_219.pth
   * --half: FP16 testing.
   * -s: evaluation image size, from 320 to 608 as in YOLOv3.
 ## Datasets
@@ -121,8 +121,9 @@ Install the VOC dataset as ./data/VOC. We also recommend a soft-link:
 ln -s /path/to/VOCdevkit ./data/VOC
 ```
 ### SWIM Dataset(in VOC format)
+```
 ln -s /path/to/SWIM ./SWIM
-
+```
 ## Training
 
 - First download the mix-up pretrained [Darknet-53](https://arxiv.org/abs/1902.04103) PyTorch base network weights at: https://drive.google.com/open?id=1phqyYhV1K9KZLQZH1kENTAPprLBmymfP  
