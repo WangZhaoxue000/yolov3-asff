@@ -1,48 +1,3 @@
-# Learning Spatial Fusion for Single-Shot Object Detection
-
-By Songtao Liu, Di Huang, Yunhong Wang
-
-### Introduction
-In this work, we propose a novel and data driven strategy for pyramidal feature fusion, referred to as adaptively spatial feature fusion (ASFF). It learns the way to spatially filter conflictive information to suppress the inconsistency, thus improving the scale-invariance of features, and introduces nearly free inference overhead. For more details, please refer to our [arXiv paper](https://arxiv.org/abs/1911.09516).
-
-<img align="center" src="https://github.com/ruinmessi/ASFF/blob/master/doc/asff.png">
-
-### Updates:
-- Add MobileNet V2!
-    * The previous models actually are all trained with the wrong anchor setting, we fix the error on mobileNet model.
-    * We currently not support rfb, dropblock and Feature Adaption for mobileNet V2.
-    * FP16 training for mobileNet is not working now. I didn't figure it out. 
-    * FP16 testing for mobileNet drops about 0.2 mAP. 
-
-- Add a demo.py file
-
-- Faster NMS (adopt official implementation)
-
-### COCO 
-
-| System |  *test-dev mAP* | **Time** (V100) | **Time** (2080ti)|
-|:-------|:-----:|:-------:|:-------:|
-| [YOLOv3 608](http://pjreddie.com/darknet/yolo/) | 33.0 | 20ms| 26ms|
-| YOLOv3 608+ [BoFs](https://arxiv.org/abs/1902.04103) | 37.0 | 20ms | 26ms|
-| YOLOv3 608 (our baseline) | **38.8** | 20ms | 26ms|
-| YOLOv3 608+ ASFF | **40.6** | 22ms | 30ms| 
-| YOLOv3 608+ ASFF\* | **42.4** | 22ms | 30ms| 
-| YOLOv3 800+ ASFF\* | **43.9** | 34ms | 38ms| 
-| YOLOv3 MobileNetV1 416 + [BoFs](https://arxiv.org/abs/1902.04103)| 28.6 | - | 22 ms| 
-| YOLOv3 MobileNetV2 416 (our baseline) | 29.0 | - | 22 ms| 
-| YOLOv3 MobileNetV2 416 +ASFF | **30.6** | - | 24 ms| 
-
-
-### Citing 
-Please cite our paper in your publications if it helps your research:
-
-    @article{liu2019asff,
-        title = {Learning Spatial Fusion for Single-Shot Object Detection},
-        author = {Songtao Liu, Di Huang and Yunhong Wang},
-        booktitle = {arxiv preprint arXiv:1911.09516},
-        year = {2019}
-    }
-
 ### Contents
 1. [Installation](#installation)
 2. [Datasets](#datasets)
@@ -69,8 +24,8 @@ Please cite our paper in your publications if it helps your research:
 
 ```Shell
 python demo.py -i /path/to/your/image \
---cfg config/yolov3_baseline.cfg -d COCO \
---checkpoint /path/to/you/weights --half --asff --rfb -s 608
+--cfg config/yolov3_baseline.cfg -d SWIM \
+--checkpoint /path/to/you/weights 
 ```
 - Note:
   * -i, --img: image path.
@@ -84,7 +39,7 @@ python demo.py -i /path/to/your/image \
 ```Shell
 python video_test.py -v /path/to/your/video \
 --cfg config/yolov3_baseline.cfg -d SWIM \
---checkpoint /path/to/you/weights --half --asff --rfb -s 608
+--checkpoint /path/to/you/weights 
 ```
 - Note:
   * -v, --video: video folder path. eg, ./examples
